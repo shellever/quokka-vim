@@ -84,6 +84,11 @@ set hlsearch
 set incsearch
 
 
+" == abbreviations
+iabbrev @@ shellever@163.com
+iabbrev ccopy Copyright 2018 Shellever, all rights reserved.
+
+
 " == mappings
 " define a mapping for the special string <Leader>
 let mapleader = ","
