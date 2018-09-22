@@ -85,8 +85,9 @@ set incsearch
 
 
 " == abbreviations
-iabbrev @@ shellever@163.com
-iabbrev ccopy Copyright 2018 Shellever, all rights reserved.
+iabbrev @blog http://shellever.com
+iabbrev @email shellever@163.com
+iabbrev @copy Copyright 2018 Shellever, all rights reserved.
 
 
 " == mappings
