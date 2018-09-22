@@ -1,0 +1,101 @@
+" switch of Vi-compatible, use the Vim defaults
+set nocompatible
+
+" enable syntax highlighting
+syntax on
+" enable file type detection
+filetype on
+" enable loading the indent/plugin files for specific file types
+filetype indent on
+filetype plugin on
+
+" don't use a swapfile for the buffer
+set noswapfile
+" don't make a backup before overwriting a file
+set nobackup
+set nowritebackup
+
+" don't ring the bell for error messages
+set noerrorbells
+" don't use visual bell
+set novisualbell
+set visualbell t_vb=
+
+" show line numbers 
+set number
+" show the line and column number of the cursor position
+set ruler
+" determinie the content of the ruler string 
+set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
+" show partial command in the last line of the screen
+set showcmd
+" show the current mode
+set showmode
+
+" cmdline-history
+set history=936
+
+" enable the use of the mouse for all previous modes
+set mouse=a
+
+" don't wrap lines longer than the width of the window
+" and display continues on the next line.
+set nowrap
+
+" indent settings {
+" use the appropriate number of spaces to insert a <Tab>
+set expandtab
+" use 4 number of spaces that a <Tab> in the file counts for
+set tabstop=4
+" when on, a <Tab> in front of a line inserts blanks according to 
+" 'shifwidth', 'tabstop' or 'softtabstop' is used in other places.
+set smarttab
+set shiftround
+set shiftwidth=4
+set softtabstop=4
+" when 'smartindent' or 'cindent' is on, 
+" the indent is changed in a different way.
+set autoindent
+set smartindent
+set cindent
+" }
+
+" on by default
+set backspace=indent,eol,start
+
+" keep minimal number when scrolling
+" vertically
+set scrolloff=3
+" horizontally
+set sidescrolloff=6
+
+" jump to the matching one when a bracket is inserted
+set showmatch
+" tenths of a second to show the matching paren (1/10s=100ms)
+set matchtime=1
+
+" ignore the case of normal letters
+set ignorecase
+" ignore case when the pattern contains lowercase letters only
+set smartcase
+" highlight all search matches
+set hlsearch
+" do incremental searching
+set incsearch
+
+
+" == mappings
+" define a mapping for the special string <Leader>
+let mapleader = ","
+" vimrc edit {
+nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+" }
+
+" escape from insert mode 
+inoremap jk <Esc>
+"inoremap <Esc> <nop>
+
+" stop the highlighting 
+nnoremap <Leader>hl :nohlsearch<CR>
+
