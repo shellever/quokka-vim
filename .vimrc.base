@@ -1,4 +1,4 @@
-" switch of Vi-compatible, use the Vim defaults
+" switch off Vi-compatible, use the Vim defaults
 set nocompatible
 
 " enable syntax highlighting
