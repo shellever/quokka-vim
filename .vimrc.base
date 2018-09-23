@@ -32,9 +32,6 @@ set showcmd
 " show the current mode
 set showmode
 
-" cmdline-history
-set history=936
-
 " enable the use of the mouse for all previous modes
 set mouse=a
 
@@ -82,6 +79,15 @@ set smartcase
 set hlsearch
 " do incremental searching
 set incsearch
+
+" cmdline-history
+set history=936
+
+" jump to the last position when reopening a file
+" for details, see /etc/vim/vimrc in 27-31 lines
+if has("autocmd")
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
+endif
 
 
 " == abbreviations
