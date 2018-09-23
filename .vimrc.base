@@ -26,7 +26,31 @@ set number
 " show the line and column number of the cursor position
 set ruler
 " determinie the content of the ruler string 
-set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
+"set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
+" show status line
+set laststatus=2
+" statusline format {
+" clear the previous
+let &statusline = ""
+" file path
+let &statusline .= "%<%F "
+" readonly, modified, modifiable flags in brackets
+let &statusline .= "%([%R%M]%) "
+" right-align everything past this point
+let &statusline .= "%= "
+" file type (eg. python, text, etc...)
+let &statusline .= "%(ft=%{&filetype}%) " . "| "
+" file format (eg. unix, dos, etc...)
+let &statusline .= "%(ff=%{&fileformat}%) " . "| "
+" file encoding (eg. utf-8, latin1, etc...)
+let &statusline .= "%(fe=%{&fileencoding}%) " . "| "
+" current char in cursor, ascii and hexadecimal
+let &statusline .= "%(cc=%b/0x%B%) " . "| "
+" current position in cursor
+let &statusline .= "%(cp=%l,%v%) " . "| "
+" percentage and total lines
+let &statusline .= "%(pl=%p%%/%L%) "
+" }
 " show partial command in the last line of the screen
 set showcmd
 " show the current mode
