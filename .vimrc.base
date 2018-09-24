@@ -145,3 +145,14 @@ nnoremap <Space> za
 nnoremap <Leader>" viw<Esc>a"<Esc>hbi"<Esc>lel
 vnoremap <Leader>" <Esc>`>a"<Esc>`<i"<Esc>`>ll
 
+" window operations {
+" resize window
+nnoremap + <C-W>+
+nnoremap - <C-W>-
+" move cursor to other windows
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+" }
+
