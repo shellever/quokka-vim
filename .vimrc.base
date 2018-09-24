@@ -117,7 +117,7 @@ endif
 " == abbreviations
 iabbrev tblog http://shellever.com
 iabbrev temail shellever@163.com
-iabbrev tcopy Copyright 2018 Shellever, all rights reserved.
+iabbrev tcopy Copyright (C) 2018 Shellever, all rights reserved.
 
 
 " == mappings
