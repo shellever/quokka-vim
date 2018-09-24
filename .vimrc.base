@@ -141,3 +141,7 @@ nnoremap <Leader>H :execute ":help " . expand("<cword>")<CR>
 " toggle fold, when in vimdiff
 nnoremap <Space> za
 
+" surround word with double quotes
+nnoremap <Leader>" viw<Esc>a"<Esc>hbi"<Esc>lel
+vnoremap <Leader>" <Esc>`>a"<Esc>`<i"<Esc>`>ll
+
