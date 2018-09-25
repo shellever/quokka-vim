@@ -1,3 +1,12 @@
+" =============================================================
+" quokka-vim - Love vim, love quokka smile
+" author:    shellever / shellever@163.com
+" home:      https://github.com/shellever/quokka-vim
+" about the abbreviated forms:
+" I'd like to strongly caution you against using these abbrev-
+" iations in your ~/.vimrc file and in plugins that you write.
+" =============================================================
+
 " switch off Vi-compatible, use the Vim defaults
 set nocompatible
 
