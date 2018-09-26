@@ -116,11 +116,17 @@ set incsearch
 " cmdline-history
 set history=936
 
+
+" == autocmd
 " jump to the last position when reopening a file
 " for details, see /etc/vim/vimrc in 27-31 lines
 if has("autocmd")
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 endif
+
+" single line comment (eg. sh,python,vim)
+autocmd FileType sh,python nnoremap <buffer> <Leader>c I#<Space><Esc>
+autocmd FileType vim       nnoremap <buffer> <Leader>c I"<Space><Esc>
 
 
 " == abbreviations
