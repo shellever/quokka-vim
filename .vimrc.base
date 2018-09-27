@@ -23,7 +23,7 @@ set encoding=utf-8
 " encoding used for the terminal
 set termencoding=utf-8
 " a list of character encodings considered when reading a file
-set fileencodings=utf-8,gbk,cp936,gb2312,ucs-bom
+set fileencodings=utf-8,gbk,cp936,gb2312,ucs-bom,latin1
 " messages of tip in the bottom status bar
 " language messages utf-8
 
