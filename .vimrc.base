@@ -18,6 +18,15 @@ filetype on
 filetype indent on
 filetype plugin on
 
+" set character encoding used inside Vim
+set encoding=utf-8
+" encoding used for the terminal
+set termencoding=utf-8
+" a list of character encodings considered when reading a file
+set fileencodings=utf-8,gbk,cp936,gb2312,ucs-bom
+" messages of tip in the bottom status bar
+" language messages utf-8
+
 " number of colors, default is 8
 " enable terminal supports 256 colors
 set t_Co=256
