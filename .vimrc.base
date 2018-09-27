@@ -162,7 +162,7 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " escape from insert mode 
 inoremap jk <Esc>
-"inoremap <Esc> <nop>
+"inoremap <Esc> <Nop>
 
 " stop the highlighting 
 nnoremap <Leader>hl :nohlsearch<CR>
@@ -187,6 +187,16 @@ nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 " }
+
+" move cursor in insert mode
+" issue: let <Backspace> turn into <Left> function
+" fixit: configure <Backspace> key sequence to ASCII 127 (Ctrl+?) in terminal (eg. Xshell, ..)
+" inoremap <C-H> <Left>
+" inoremap <C-J> <Down>
+" inoremap <C-K> <Up>
+" inoremap <C-L> <Right>
+" inoremap <C-A> <Esc>0i
+" inoremap <C-E> <Esc>$i
 
 " quit and write
 nnoremap <Leader>q :q<CR>
