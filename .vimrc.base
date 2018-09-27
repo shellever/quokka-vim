@@ -32,8 +32,8 @@ set fileencodings=utf-8,gbk,cp936,gb2312,ucs-bom
 set t_Co=256
 " color style
 set background=dark
-" color scheme
-colorscheme desert
+" color scheme: desert
+colorscheme default
 
 " don't use a swapfile for the buffer
 set noswapfile
