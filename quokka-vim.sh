@@ -17,6 +17,7 @@ function debug_print()
     }
 }
 
+
 function print_help_info()
 {
     echo
@@ -31,6 +32,7 @@ function print_help_info()
     echo
     exit 1
 }
+
 
 function vim_requirement_setup()
 {
@@ -72,6 +74,7 @@ function ycm_compile_with_c()
     cd -
 }
 
+
 function do_config_action_backup()
 {
     # backup: .vimrc -> .vimrc.backup_by_quokka_vim
@@ -90,6 +93,27 @@ function do_config_action_restore()
         mv $fname_backup $fname
     fi
 }
+
+
+# issue: error to customize colorscheme before install plugin
+# fixed: take a shadow to install plugin only, not setup configs for plugins
+function do_shadow_before_vim_plugin_install()
+{
+    debug_print "do_shadow_before_vim_plugin_install"
+    do_config_action_backup $HOME/.vimrc
+
+    cp -p $Q_ROOT_PATH/.vimrc.ext $Q_ROOT_PATH/.vimrc.shadow
+    sed -i '/=== common configs/,$d' $Q_ROOT_PATH/.vimrc.shadow
+    ln -sf $Q_ROOT_PATH/.vimrc.shadow $HOME/.vimrc
+}
+
+function do_shadow_after_vim_plugin_install()
+{
+    debug_print "do_shadow_after_vim_plugin_install"
+    rm $Q_ROOT_PATH/.vimrc.shadow
+    do_config_action_restore $HOME/.vimrc
+}
+
 
 function do_config_action_install_base()
 {
@@ -110,6 +134,7 @@ function do_config_action_install_ext()
     ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc.base
 }
 
+
 function do_config_action_install()
 {
     debug_print "do_config_action_install"
@@ -119,7 +144,11 @@ function do_config_action_install()
         vim_requirement_setup
         vim_plugin_manager_setup
         do_config_action_install_ext
+
+        do_shadow_before_vim_plugin_install
         vim_plugin_install
+        do_shadow_after_vim_plugin_install
+
         ycm_compile_with_c
     fi
 }
