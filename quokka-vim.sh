@@ -87,20 +87,36 @@ function do_config_action_restore()
     fi
 }
 
+function do_config_action_install_base()
+{
+    debug_print "do_config_action_install_base"
+    do_config_action_backup $HOME/.vimrc
+
+    ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc
+}
+
+function do_config_action_install_ext()
+{
+    debug_print "do_config_action_install_ext"
+    do_config_action_backup $HOME/.vim
+    do_config_action_backup $HOME/.vimrc
+
+    ln -sf $Q_ROOT_PATH/.vim $HOME/.vim
+    ln -sf $Q_ROOT_PATH/.vimrc.ext $HOME/.vimrc
+    ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc.base
+}
+
 function do_config_action_install()
 {
     debug_print "do_config_action_install"
     if [ "$config_type" = "base" ]; then
-        do_config_action_backup $HOME/.vimrc
-
-        ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc
+        do_config_action_install_base
     elif [ "$config_type" = "ext" ]; then
-        do_config_action_backup $HOME/.vim
-        do_config_action_backup $HOME/.vimrc
-
-        ln -sf $Q_ROOT_PATH/.vim $HOME/.vim
-        ln -sf $Q_ROOT_PATH/.vimrc.ext $HOME/.vimrc
-        ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc.base
+        vim_requirement_setup
+        vim_plugin_manager_setup
+        do_config_action_install_ext
+        vim_plugin_install
+        ycm_compile_with_c
     fi
 }
 
@@ -152,10 +168,6 @@ done
 if [ "$config_action" = "uninstall" ]; then
     do_config_action_uninstall
 elif [ "$config_action" = "install" ]; then
-    vim_requirement_setup
-    vim_plugin_manager_setup
     do_config_action_install
-    vim_plugin_install
-    ycm_compile_with_c
 fi
 
