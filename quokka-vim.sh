@@ -64,7 +64,7 @@ function vim_plugin_install()
 function ycm_compile_with_c()
 {
     cd $Q_ROOT_PATH/.vim/bundle/YouCompleteMe
-    python3 install.py -clang-completer
+    python3 install.py --clang-completer
     cd -
 }
 
