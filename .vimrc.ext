@@ -1,0 +1,242 @@
+" ============================================================
+" quokka-vim - Love vim, love quokka smile
+" author: shellever / shellever@163.com
+" home:   https://github.com/shellever/quokka-vim
+" about the abbreviated forms:
+" I’d like to strongly caution you against using these abbrev-
+" iations in your ~/.vimrc file and in plugins that you write.
+" ============================================================
+
+" === plugin manager
+" Vundle settings {{{
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+
+" Keep Plugin commands between vundle#begin/end.
+" === plugin on GitHub repo
+" --- nerdtree - a tree explorer plugin for vim
+Plugin 'scrooloose/nerdtree'
+" --- nerdcommenter - vim plugin for intensely orgasmic commenting
+Plugin 'scrooloose/nerdcommenter'
+" --- syntastic - syntax checking hacks for vim
+Plugin 'scrooloose/syntastic'
+" --- tagbar - vim plugin that displays tags in a window
+Plugin 'majutsushi/tagbar'
+" --- ctrlp - full path fuzzy file, buffer, mru, tag, ... finder for vim
+Plugin 'kien/ctrlp.vim'
+" --- vim-airline - lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" --- vim-colors-solarized - precision colorscheme for vim
+Plugin 'altercation/vim-colors-solarized'
+" --- molokai - molokai color scheme for vim
+Plugin 'tomasr/molokai'
+" --- vim-material-monokai - a dark material design version of monokai for vim
+Plugin 'skielbasa/vim-material-monokai'
+" --- vim-sublime-monokai - sublime's monokai syntax highlighting
+Plugin 'ErichDonGubler/vim-sublime-monokai'
+" vim-citylights - vim port of city lights color scheme
+Plugin 'agreco/vim-citylights'
+" github.vim - a GitHub colors scheme for neovim/gvim/vim
+Plugin 'albertorestifo/github.vim'
+" vim-colors-plain - minimal colorscheme for vim
+Plugin 'andreypopp/vim-colors-plain'
+" neodark.vim - a dark color scheme for vim
+Plugin 'KeitaNakamura/neodark.vim'
+" detorte - detorte color scheme for vim
+Plugin 'tamlok/detorte'
+" --- DoxygenToolkit.vim - simplify doxygen documentation in c, c++, python
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+" --- YouCompleteMe - a code-completion engine for vim
+Plugin 'Valloric/YouCompleteMe'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append  to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append  to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append  to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+" }}}
+
+
+" === common configs
+source ~/.vimrc.base
+set t_Co=256
+set background=dark
+" set termguicolors
+" highlight the screen line/column of the cursor
+set cursorline
+set cursorcolumn
+" switch color scheme (
+" molokai, material-monokai(v), vim-sublime-monokai, citylights,
+" github, plain(v), neodark(v), detorte(v),
+" ) 
+colorscheme detorte
+
+
+" === plugins configs
+" NERDTree {{{
+" --- mappings: switch NERDTree window
+nnoremap <F3> :NERDTreeToggle<CR>
+inoremap <F3> <Esc>:NERDTreeToggle<CR>
+
+" window size
+" let NERDTreeWinSize = 30
+
+" show hidden files and directories
+" type shift+i to switch it
+let NERDTreeShowHidden = 1
+
+" ignore files
+let NERDTreeIgnore = ['\~$', '\.pyc$', '\.swp$', '\.git$', '\.svn$', '\.o$']
+
+" open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in = 1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" open NERDTree automatically when vim starts up on opening a directory
+autocmd VimEnter * 
+  \ if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | 
+  \     execute 'NERDTree' argv()[0] | 
+  \     wincmd p | 
+  \     enew | 
+  \ endif
+
+" close vim if the only window left open is a NERDTree
+autocmd BufEnter * 
+  \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | 
+  \     quit | 
+  \ endif
+" }}}
+
+" nerdcommenter {{{
+" add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" }}}
+
+" tagbar {{{
+" --- mappings: toggle the tagbar window
+nnoremap <F4> :TagbarToggle<CR>
+" specify ctags executeable path if not in $PATH
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
+" let g:tagbar_width = 30
+" }}}
+
+" ctrlp {{{
+" --- mappings: invoke CtrlP
+let g:ctrlp_map = '<Leader>p'
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/]\.(git|svn|hg|rvm)$',
+  \ 'file': '\v\.(exe|so|dll|zip|tag|tag.gz|pyc|class)$',
+  \ }
+" }}}
+
+" vim-airline {{{
+" --- mappings: switch to next and previous tab (window in fact)
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprevious<CR>
+
+" enable smarter tabline
+let g:airline#extensions#tabline#enabled = 1
+" show tab number
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+" path formatter in tabline (jsformatter unique_tail unique_tail_improved)
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" integrating with powerline fonts
+let g:airline_powerline_fonts = 1
+" }}}
+
+" vim-airline-themes {{{
+" themes: simple ange molokai tomorrow solarized lucius materialmonokai
+" let g:airline_theme = 'simple'
+" let g:airline_theme = 'molokai'
+" let g:airline_theme = 'solarized'
+let g:airline_theme = 'bubblegum'
+" }}}
+
+" vim-colors-solarized {{{
+" if has('gui_running')
+"     set background=light
+" else
+"     set background=dark
+" endif
+" colorscheme solarized
+" }}}
+ 
+" molokai {{{
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+" }}}
+ 
+" vim-material-monokai {{{
+" enable italic comments
+" let g:materialmonokai_italic = 1
+" enable subtle spell highlighting
+" let g:materialmonokai_subtle_spell = 1
+" disable the custom ALE indicators if you want to set your own
+" or like the default ones
+" let g:materialmonokai_custom_lint_indicators = 0
+" enable subtle mode indicator
+" let g:materialmonokai_subtle_airline = 1
+" }}}
+
+" vim-sublime-monokai {{{
+" by default italicized text is enable in GUI (gVim), but in terminal it's not
+" let g:sublimemonokai_term_italic = 1
+" }}}
+
+" detorte {{{
+" theme: dark light
+let g:detorte_theme_mode = 'dark'
+" }}}
+
+" DoxygenToolkit.vim {{{
+let g:DoxygenToolkit_authorName = "shellever@163.com"
+nnoremap <Leader>da :DoxAuthor<CR>
+nnoremap <Leader>df :Dox<CR>
+nnoremap <Leader>db :DoxBlock<CR>
+nnoremap <Leader>dc a /*  */<Left><Left><Left>
+" }}}
+
+" YouCompleteMe {{{
+" number of characters to trigger completion suggestions
+" let g:ycm_min_num_of_chars_for_completion = 2
+" turn on YCM's identifier completer
+" let g:ycm_auto_trigger = 1
+
+" show the completion menu even when typing inside comments
+" let g:ycm_complete_in_comments = 0
+" show the completion menu even when typing inside strings
+" let g:ycm_complete_in_strings = 1
+
+" collect identifiers from strings and comments
+" let g:ycm_collect_identifiers_from_comments_and_strings = 0
+" collect identifiers from tag files
+" let g:ycm_collect_identifiers_from_tags_files = 0
+" seed its identifier database with the keywords of the programming
+" language you're writing
+" let g:ycm_seed_identifiers_with_syntax = 0
+" }}}
+
