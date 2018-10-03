@@ -42,7 +42,9 @@ function vim_requirement_setup()
     # powerline symbols font
     sudo apt-get install -y fonts-powerline
     # requirements for Ycm
-    sudo apt-get install -y build-essential cmake python3-dev
+    # required cmake 3.4+
+    sudo apt-get install -y cmake3
+    sudo apt-get install -y build-essential python3-dev
 }
 
 # set up Vundle as vim plugin manager
