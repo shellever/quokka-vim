@@ -1,10 +1,9 @@
-# quokka-vim
+## quokka-vim
 
 Love vim, love quokka smile.
 
 
-Installation
-------
+## Installation
 
 ```bash
 $ git clone git@github.com:shellever/quokka-vim.git
@@ -18,8 +17,7 @@ $ ./quokka-vim.sh -ie
 ```
 
 
-Uninstallation
------
+## Uninstallation
 
 ```bash
 # base vimrc
@@ -30,8 +28,7 @@ $ ./quokka-vim.sh -ue
 ```
 
 
-Screenshots
-------
+## Screenshots
 
 vimrc.ext
 
@@ -40,4 +37,18 @@ vimrc.ext
 vimrc.base statusline
 
 ![statusline](./screenshots/status_line_format.png "statusline")
+
+
+## Plugins
+
+* [x] [Vundle.vim](https://github.com/VundleVim/Vundle.vim)
+* [x] [NERDTree](https://github.com/scrooloose/nerdtree)
+* [x] [NERDCommenter](https://github.com/scrooloose/nerdcommenter)
+* [x] [Syntastic](https://github.com/scrooloose/syntastic)
+* [x] [Tagbar](https://github.com/majutsushi/tagbar)
+* [x] [ctrlp.vim](https://github.com/kien/ctrlp.vim)
+* [x] [DoxygenToolkit.vim](https://github.com/vim-scripts/DoxygenToolkit.vim)
+* [x] [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+* [x] [vim-airline](https://github.com/vim-airline/vim-airline)
+* [x] [detorte](https://github.com/tamlok/detorte)
 
