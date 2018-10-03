@@ -3,3 +3,6 @@
 
 # backup file
 *.bak
+
+# ctags
+tags
