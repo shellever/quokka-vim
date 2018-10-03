@@ -6,7 +6,7 @@ Love vim, love quokka smile.
 ## Installation
 
 ```bash
-$ git clone git@github.com:shellever/quokka-vim.git
+$ git clone https://github.com/shellever/quokka-vim.git
 $ cd quokka-vim
 
 # base vimrc
