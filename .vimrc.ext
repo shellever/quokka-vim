@@ -34,6 +34,11 @@ Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 " --- ctrlp - full path fuzzy file, buffer, mru, tag, ... finder for vim
 Plugin 'kien/ctrlp.vim'
+" --- DoxygenToolkit.vim - simplify doxygen documentation in c, c++, python
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+" --- YouCompleteMe - a code-completion engine for vim
+Plugin 'Valloric/YouCompleteMe'
+
 " --- vim-airline - lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -55,10 +60,6 @@ Plugin 'andreypopp/vim-colors-plain'
 Plugin 'KeitaNakamura/neodark.vim'
 " detorte - detorte color scheme for vim
 Plugin 'tamlok/detorte'
-" --- DoxygenToolkit.vim - simplify doxygen documentation in c, c++, python
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-" --- YouCompleteMe - a code-completion engine for vim
-Plugin 'Valloric/YouCompleteMe'
 
 
 " All of your Plugins must be added before the following line
