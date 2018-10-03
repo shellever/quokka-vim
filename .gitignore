@@ -1,0 +1,5 @@
+# local configs directory
+.vim
+
+# backup file
+*.bak
