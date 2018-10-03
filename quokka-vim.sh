@@ -51,8 +51,10 @@ function vim_requirement_setup()
 function vim_plugin_manager_setup()
 {
     local repo_vundle_vim=https://github.com/VundleVim/Vundle.vim.git
-    mkdir -p $Q_ROOT_PATH/.vim/bundle
-    git clone $repo_vundle_vim $Q_ROOT_PATH/.vim/bundle/Vundle.vim
+    if [ ! -d $Q_ROOT_PATH/.vim.bundle/Vundle.vim ]; then
+        mkdir -p $Q_ROOT_PATH/.vim/bundle
+        git clone $repo_vundle_vim $Q_ROOT_PATH/.vim/bundle/Vundle.vim
+    fi
 }
 
 # install plugins and quit
