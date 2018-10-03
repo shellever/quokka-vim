@@ -8,6 +8,7 @@ is_debug=true
 # quokka-vim root path
 Q_ROOT_PATH=$(cd `dirname $0`; pwd)
 
+
 function debug_print()
 {
     local msg=$1
@@ -133,41 +134,24 @@ function do_config_action_uninstall()
 }
 
 
+# start here
 # parse options
 while getopts behiu ARGS; do
     debug_print "option: $ARGS"
     case $ARGS in
-        b)
-            debug_print "base"
-            config_type="base"
-            ;;
-        e)
-            debug_print "ext"
-            config_type="ext"
-            ;;
-        i)
-            debug_print "install"
-            config_action="install"
-            ;;
-        u)
-            debug_print "uninstall"
-            config_action="uninstall"
-            ;;
-        h)
-            debug_print "help"
-            print_help_info
-            ;;
-        *)
-            debug_print "invalid"
-            print_help_info
-            ;;
+        b) config_type="base";;
+        e) config_type="ext";;
+        i) config_action="install";;
+        u) config_action="uninstall";;
+        h) print_help_info;;
+        *) print_help_info;;
     esac
 done
 
 # dispatch according to action
-if [ "$config_action" = "uninstall" ]; then
-    do_config_action_uninstall
-elif [ "$config_action" = "install" ]; then
+if [ "$config_action" = "install" ]; then
     do_config_action_install
+elif [ "$config_action" = "uninstall" ]; then
+    do_config_action_uninstall
 fi
 
