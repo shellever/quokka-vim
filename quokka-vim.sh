@@ -87,34 +87,35 @@ function do_config_action_restore()
     fi
 }
 
-function do_config_action_base()
+function do_config_action_install()
 {
-    debug_print "do_config_action_base"
-    if [ "$config_action" = "install" ]; then
+    debug_print "do_config_action_install"
+    if [ "$config_type" = "base" ]; then
         do_config_action_backup $HOME/.vimrc
 
         ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc
-    elif [ "$config_action" = "uninstall" ]; then
-        do_config_action_restore $HOME/.vimrc
-    fi
-}
-
-function do_config_action_ext()
-{
-    debug_print "do_config_action_ext"
-    if [ "$config_action" = "install" ]; then
+    elif [ "$config_type" = "ext" ]; then
         do_config_action_backup $HOME/.vim
         do_config_action_backup $HOME/.vimrc
 
         ln -sf $Q_ROOT_PATH/.vim $HOME/.vim
         ln -sf $Q_ROOT_PATH/.vimrc.ext $HOME/.vimrc
         ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc.base
-    elif [ "$config_action" = "uninstall" ]; then
+    fi
+}
+
+function do_config_action_uninstall()
+{
+    debug_print "do_config_action_uninstall"
+    if [ "$config_type" = "base" ]; then
+        do_config_action_restore $HOME/.vimrc
+    elif [ "$config_type" = "ext" ]; then
         do_config_action_restore $HOME/.vim
         do_config_action_restore $HOME/.vimrc
         [ -e $HOME/.vimrc.base ] && rm $HOME/.vimrc.base
     fi
 }
+
 
 # parse options
 while getopts behiu ARGS; do
@@ -147,13 +148,13 @@ while getopts behiu ARGS; do
     esac
 done
 
-# dispatch type action
-if [ "$config_type" = "base" ]; then
-    do_config_action_base
-elif [ "$config_type" = "ext" ]; then
+# dispatch according to action
+if [ "$config_action" = "install" ]; then
+    do_config_action_install
+elif [ "$config_action" = "uninstall" ]; then
     vim_requirement_setup
     vim_plugin_manager_setup
-    do_config_action_ext
+    do_config_action_uninstall
     vim_plugin_install
     ycm_compile_with_c
 fi
