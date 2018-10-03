@@ -81,10 +81,9 @@ function do_config_action_restore()
     # restore: .vimrc.backup_by_quokka_vim -> .vimrc
     local fname="$1"
     local fname_backup="${fname}.backup_by_quokka_vim"
+    rm $fname
     if [ -e $fname_backup ]; then
         mv $fname_backup $fname
-    else
-        rm $fname
     fi
 }
 
