@@ -149,12 +149,12 @@ while getopts behiu ARGS; do
 done
 
 # dispatch according to action
-if [ "$config_action" = "install" ]; then
-    do_config_action_install
-elif [ "$config_action" = "uninstall" ]; then
+if [ "$config_action" = "uninstall" ]; then
+    do_config_action_uninstall
+elif [ "$config_action" = "install" ]; then
     vim_requirement_setup
     vim_plugin_manager_setup
-    do_config_action_uninstall
+    do_config_action_install
     vim_plugin_install
     ycm_compile_with_c
 fi
