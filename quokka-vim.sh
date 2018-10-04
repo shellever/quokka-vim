@@ -36,17 +36,33 @@ function print_help_info()
 
 function vim_requirement_setup()
 {
+    local distrib_release=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | awk -F= '{print $2}')
+
     # Vi IMproved - enhanced vi editor
     # YouCompleteMe requires Vim 7.4.1578+
     sudo apt-get install -y vim
+
+    # tagbar {{{
     # build tag file indexes of source code definitions
     sudo apt-get install -y exuberant-ctags
+    # }}}
+
+    # airline {{{
     # powerline symbols font
     sudo apt-get install -y fonts-powerline
-    # requirements for Ycm
-    # required cmake 3.4+
-    sudo apt-get install -y cmake3
+    # }}}
+
+    # requirements for Ycm {{{
     sudo apt-get install -y build-essential python3-dev
+
+    if [ "$distrib_release" = "14.04" ]; then
+        # required cmake 3.4+
+        sudo apt-get install -y cmake3
+    else
+        # Ubuntu 16.04 and later
+        sudo apt-get install -y cmake
+    fi
+    # }}}
 }
 
 # set up Vundle as vim plugin manager
@@ -143,6 +159,7 @@ function do_config_action_install()
     elif [ "$config_type" = "ext" ]; then
         vim_requirement_setup
         vim_plugin_manager_setup
+
         do_config_action_install_ext
 
         do_shadow_before_vim_plugin_install
