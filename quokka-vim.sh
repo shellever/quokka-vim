@@ -33,8 +33,13 @@ function print_help_info()
     exit 1
 }
 
+function vim_requirement_setup_base()
+{
+    # Vi IMproved - enhanced vi editor
+    sudo apt-get install -y vim
+}
 
-function vim_requirement_setup()
+function vim_requirement_setup_ext()
 {
     local distrib_release=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | awk -F= '{print $2}')
 
@@ -155,9 +160,10 @@ function do_config_action_install()
 {
     debug_print "do_config_action_install"
     if [ "$config_type" = "base" ]; then
+        vim_requirement_setup_base
         do_config_action_install_base
     elif [ "$config_type" = "ext" ]; then
-        vim_requirement_setup
+        vim_requirement_setup_ext
         vim_plugin_manager_setup
 
         do_config_action_install_ext
