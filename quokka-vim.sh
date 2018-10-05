@@ -115,8 +115,7 @@ function vim_requirement_setup_ext()
     sudo apt-get install -y fonts-powerline
     # }}}
 
-    # requirements for Ycm {{{
-    # Vi IMproved - enhanced vi editor
+    # ycm {{{
     # YouCompleteMe requires Vim 7.4.1578+
     # install vim using source (Vim 8.1)
     vim_build_from_source
