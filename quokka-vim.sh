@@ -52,7 +52,9 @@ function vim_build_from_source()
         python3-dev ruby-dev lua5.1 liblua5.1-dev libperl-dev git
 
     # 2. remove vim if you have it already
-    # sudo apt-get remove vim vim-runtime gvim
+    sudo apt-get remove -y vim vim-runtime gvim
+    # on Ubuntu 12.04.2 you probably have to remove these packages as well
+    sudo apt-get remove -y vim-tiny vim-common vim-gui-common vim-nox
 
     # 3. once everything is installed, getting the source is easy
     git clone https://github.com/vim/vim.git
@@ -71,13 +73,21 @@ function vim_build_from_source()
         --enable-gui=gtk2 \
         --enable-cscope \
         --prefix=/usr
-    make VIMRUNTIMEDIR=/usr/share/vim/vim81
+    # make VIMRUNTIMEDIR=/usr/share/vim/vim81
+    make
     # use make to install
     sudo make install
     cd -
 
+    # set vim as your default editor with update-alternatives
+    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+    sudo update-alternatives --set editor /usr/bin/vim
+    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim 1
+    sudo update-alternatives --set vi /usr/bin/vim
+
     # remove vim directory if install successfully
-    [ "$vim_version" = "8.1" ] && rm -rf ./vim
+    [ "$(which vim)" = "/usr/bin/vim" ] && rm -rf ./vim
+    # [ "$vim_version" = "8.1" ] && rm -rf ./vim
 }
 
 function vim_requirement_setup_base()
