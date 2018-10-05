@@ -123,7 +123,7 @@ function vim_requirement_setup_ext()
 function vim_plugin_manager_setup()
 {
     local repo_vundle_vim=https://github.com/VundleVim/Vundle.vim.git
-    if [ ! -d $Q_ROOT_PATH/.vim.bundle/Vundle.vim ]; then
+    if [ ! -d $Q_ROOT_PATH/.vim/bundle/Vundle.vim ]; then
         mkdir -p $Q_ROOT_PATH/.vim/bundle
         git clone $repo_vundle_vim $Q_ROOT_PATH/.vim/bundle/Vundle.vim
     fi
