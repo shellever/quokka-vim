@@ -39,12 +39,6 @@ function vim_build_from_source()
 {
     debug_print "===> vim_build_from_source"
 
-    # get vim version
-    local vim_version=$(vim --version | head -1 | awk '{print $5}')
-
-    # return if vim had been installed successfully
-    test "$vim_version" = "8.1" && return 0
-
     # 1. install all the prerequisite libraries
     sudo apt-get update
     sudo apt-get install -y libncurses5-dev libgnome2-dev libgnomeui-dev \
@@ -58,8 +52,12 @@ function vim_build_from_source()
     sudo apt-get remove -y vim-tiny vim-common vim-gui-common vim-nox
 
     # 3. once everything is installed, getting the source is easy
-    git clone https://github.com/vim/vim.git
+    if [ ! -d vim ]; then
+        git clone https://github.com/vim/vim.git
+    fi
+
     cd vim
+    sudo make uninstall
     make distclean
 
     # Note for Ubuntu users: You can only use Python 2 or Python 3.
@@ -88,7 +86,7 @@ function vim_build_from_source()
     sudo update-alternatives --set vi /usr/bin/vim
 
     # remove vim directory if install successfully
-    [ "$(which vim)" = "/usr/bin/vim" ] && rm -rf ./vim
+    [ "$(which vim)" = "/usr/bin/vim" ] && [ "$(which vi)" = "/usr/bin/vi" ] && rm -rf ./vim
 }
 
 function vim_requirement_setup_base()
