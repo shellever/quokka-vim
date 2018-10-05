@@ -38,6 +38,8 @@ function print_help_info()
 # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 function vim_build_from_source()
 {
+    debug_print "===> vim_build_from_source"
+
     # get vim version
     local vim_version=$(vim --version | head -1 | awk '{print $5}')
 
@@ -73,7 +75,7 @@ function vim_build_from_source()
         --enable-gui=gtk2 \
         --enable-cscope \
         --prefix=/usr
-    # make VIMRUNTIMEDIR=/usr/share/vim/vim81
+
     make
     # use make to install
     sudo make install
@@ -87,24 +89,21 @@ function vim_build_from_source()
 
     # remove vim directory if install successfully
     [ "$(which vim)" = "/usr/bin/vim" ] && rm -rf ./vim
-    # [ "$vim_version" = "8.1" ] && rm -rf ./vim
 }
 
 function vim_requirement_setup_base()
 {
+    debug_print "===> vim_requirement_setup_base"
+
     # Vi IMproved - enhanced vi editor
     sudo apt-get install -y vim
 }
 
 function vim_requirement_setup_ext()
 {
-    local distrib_release=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | awk -F= '{print $2}')
+    debug_print "===> vim_requirement_setup_ext"
 
-    # Vi IMproved - enhanced vi editor
-    # YouCompleteMe requires Vim 7.4.1578+
-    # sudo apt-get install -y vim
-    # install vim using source (Vim 8.1)
-    vim_build_from_source
+    local distrib_release=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | awk -F= '{print $2}')
 
     # tagbar {{{
     # build tag file indexes of source code definitions
@@ -117,6 +116,11 @@ function vim_requirement_setup_ext()
     # }}}
 
     # requirements for Ycm {{{
+    # Vi IMproved - enhanced vi editor
+    # YouCompleteMe requires Vim 7.4.1578+
+    # install vim using source (Vim 8.1)
+    vim_build_from_source
+
     sudo apt-get install -y build-essential python3-dev
 
     if [ "$distrib_release" = "14.04" ]; then
@@ -132,6 +136,8 @@ function vim_requirement_setup_ext()
 # set up Vundle as vim plugin manager
 function vim_plugin_manager_setup()
 {
+    debug_print "===> vim_plugin_manager_setup"
+
     local repo_vundle_vim=https://github.com/VundleVim/Vundle.vim.git
     if [ ! -d $Q_ROOT_PATH/.vim/bundle/Vundle.vim ]; then
         mkdir -p $Q_ROOT_PATH/.vim/bundle
@@ -142,6 +148,8 @@ function vim_plugin_manager_setup()
 # install plugins and quit
 function vim_plugin_install()
 {
+    debug_print "===> vim_plugin_install"
+
     # vim -c "PluginInstall" -c "q" -c "q"
     vim +PluginInstall +qall
 }
@@ -149,6 +157,8 @@ function vim_plugin_install()
 # compiling YCM with semantic support for C-family languages
 function ycm_compile_with_c()
 {
+    debug_print "===> ycm_compile_with_c"
+
     cd $Q_ROOT_PATH/.vim/bundle/YouCompleteMe
     python3 install.py --clang-completer
     cd -
@@ -179,7 +189,8 @@ function do_config_action_restore()
 # fixed: take a shadow to install plugin only, not setup configs for plugins
 function do_shadow_before_vim_plugin_install()
 {
-    debug_print "do_shadow_before_vim_plugin_install"
+    debug_print "===> do_shadow_before_vim_plugin_install"
+
     do_config_action_backup $HOME/.vimrc
 
     cp -p $Q_ROOT_PATH/.vimrc.ext $Q_ROOT_PATH/.vimrc.shadow
@@ -189,7 +200,8 @@ function do_shadow_before_vim_plugin_install()
 
 function do_shadow_after_vim_plugin_install()
 {
-    debug_print "do_shadow_after_vim_plugin_install"
+    debug_print "===> do_shadow_after_vim_plugin_install"
+
     rm $Q_ROOT_PATH/.vimrc.shadow
     do_config_action_restore $HOME/.vimrc
 }
@@ -197,7 +209,8 @@ function do_shadow_after_vim_plugin_install()
 
 function do_config_action_install_base()
 {
-    debug_print "do_config_action_install_base"
+    debug_print "===> do_config_action_install_base"
+
     do_config_action_backup $HOME/.vimrc
 
     ln -sf $Q_ROOT_PATH/.vimrc.base $HOME/.vimrc
@@ -205,7 +218,8 @@ function do_config_action_install_base()
 
 function do_config_action_install_ext()
 {
-    debug_print "do_config_action_install_ext"
+    debug_print "===> do_config_action_install_ext"
+
     do_config_action_backup $HOME/.vim
     do_config_action_backup $HOME/.vimrc
 
@@ -217,7 +231,7 @@ function do_config_action_install_ext()
 
 function do_config_action_install()
 {
-    debug_print "do_config_action_install"
+    debug_print "===> do_config_action_install"
     if [ "$config_type" = "base" ]; then
         vim_requirement_setup_base
         do_config_action_install_base
@@ -237,7 +251,7 @@ function do_config_action_install()
 
 function do_config_action_uninstall()
 {
-    debug_print "do_config_action_uninstall"
+    debug_print "===> do_config_action_uninstall"
     if [ "$config_type" = "base" ]; then
         do_config_action_restore $HOME/.vimrc
     elif [ "$config_type" = "ext" ]; then
