@@ -88,7 +88,9 @@ function vim_build_from_source()
     sudo update-alternatives --set vi /usr/bin/vim
 
     # remove vim directory if install successfully
-    [ "$(which vim)" = "/usr/bin/vim" ] && [ "$(which vi)" = "/usr/bin/vi" ] && rm -rf ./vim
+    [ "$(which vim)" = "/usr/bin/vim" ] && [ "$(which vi)" = "/usr/bin/vi" ] && {
+        rm -rf ./vim
+    }
 }
 
 function vim_requirement_setup_base()
