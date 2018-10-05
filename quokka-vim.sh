@@ -30,7 +30,6 @@ function print_help_info()
     echo "  -i    install vimrc config"
     echo "  -u    uninstall vimrc config"
     echo
-    exit 1
 }
 
 # Reference:
@@ -270,8 +269,8 @@ while getopts behiu ARGS; do
         e) config_type="ext";;
         i) config_action="install";;
         u) config_action="uninstall";;
-        h) print_help_info;;
-        *) print_help_info;;
+        h) print_help_info; exit 0;;
+        *) print_help_info; exit 1;;
     esac
 done
 
