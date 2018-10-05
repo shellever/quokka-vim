@@ -33,6 +33,52 @@ function print_help_info()
     exit 1
 }
 
+# Reference:
+# Building Vim from source
+# https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+function vim_build_from_source()
+{
+    # get vim version
+    local vim_version=$(vim --version | head -1 | awk '{print $5}')
+
+    # return if vim had been installed successfully
+    test "$vim_version" = "8.1" && return 0
+
+    # 1. install all the prerequisite libraries
+    sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+        libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+        libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+        python3-dev ruby-dev lua5.1 liblua5.1-dev libperl-dev git
+
+    # 2. remove vim if you have it already
+    # sudo apt-get remove vim vim-runtime gvim
+
+    # 3. once everything is installed, getting the source is easy
+    git clone https://github.com/vim/vim.git
+    cd vim
+    make distclean
+    ./configure --with-features=huge \
+        --enable-multibyte \
+        --enable-rubyinterp=yes \
+        --enable-pythoninterp=yes \
+        --with-python-config-dir=/usr/lib/python2.7/config \
+        # Note for Ubuntu users: You can only use Python 2 or Python 3.
+        # --enable-python3interp=yes \
+        # --with-python3-config-dir=/usr/lib/python3.5/config \
+        --enable-perlinterp=yes \
+        --enable-luainterp=yes \
+        --enable-gui=gtk2 \
+        --enable-cscope \
+        --prefix=/usr
+    make VIMRUNTIMEDIR=/usr/share/vim/vim81
+    # use make to install
+    sudo make install
+    cd -
+
+    # remove vim directory if install successfully
+    [ "$vim_version" = "8.1" ] && rm -rf ./vim
+}
+
 function vim_requirement_setup_base()
 {
     # Vi IMproved - enhanced vi editor
@@ -45,7 +91,9 @@ function vim_requirement_setup_ext()
 
     # Vi IMproved - enhanced vi editor
     # YouCompleteMe requires Vim 7.4.1578+
-    sudo apt-get install -y vim
+    # sudo apt-get install -y vim
+    # install vim using source (Vim 8.1)
+    vim_build_from_source
 
     # tagbar {{{
     # build tag file indexes of source code definitions
