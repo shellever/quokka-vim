@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-# turn on debug mode
-# set -x
+# home: https://github.com/shellever/quokka-vim
+# MIT License. Copyright (C) 2018 Shellever.
+
+
 # flag for debug mode (true/false)
 is_debug=true
 
