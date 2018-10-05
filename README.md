@@ -52,3 +52,8 @@ vimrc.base statusline
 * [x] [vim-airline](https://github.com/vim-airline/vim-airline)
 * [x] [detorte](https://github.com/tamlok/detorte)
 
+
+## License
+
+MIT License. Copyright (C) 2018 Shellever.
+
