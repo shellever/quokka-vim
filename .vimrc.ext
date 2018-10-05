@@ -43,14 +43,10 @@ Plugin 'Valloric/YouCompleteMe'
 " --- vim-airline - lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" --- vim-colors-solarized - precision colorscheme for vim
-Plugin 'altercation/vim-colors-solarized'
 " --- molokai - molokai color scheme for vim
 Plugin 'tomasr/molokai'
 " --- vim-material-monokai - a dark material design version of monokai for vim
 Plugin 'skielbasa/vim-material-monokai'
-" --- vim-sublime-monokai - sublime's monokai syntax highlighting
-Plugin 'ErichDonGubler/vim-sublime-monokai'
 " vim-citylights - vim port of city lights color scheme
 Plugin 'agreco/vim-citylights'
 " github.vim - a GitHub colors scheme for neovim/gvim/vim
@@ -89,7 +85,7 @@ set background=dark
 set cursorline
 set cursorcolumn
 " switch color scheme (
-" molokai, material-monokai(v), vim-sublime-monokai, citylights,
+" molokai, material-monokai(v), citylights,
 " github, plain(v), neodark(v), detorte(v),
 " ) 
 colorscheme detorte
@@ -178,15 +174,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'bubblegum'
 " }}}
 
-" vim-colors-solarized {{{
-" if has('gui_running')
-"     set background=light
-" else
-"     set background=dark
-" endif
-" colorscheme solarized
-" }}}
- 
 " molokai {{{
 " let g:molokai_original = 1
 " let g:rehash256 = 1
@@ -202,11 +189,6 @@ let g:airline_theme = 'bubblegum'
 " let g:materialmonokai_custom_lint_indicators = 0
 " enable subtle mode indicator
 " let g:materialmonokai_subtle_airline = 1
-" }}}
-
-" vim-sublime-monokai {{{
-" by default italicized text is enable in GUI (gVim), but in terminal it's not
-" let g:sublimemonokai_term_italic = 1
 " }}}
 
 " detorte {{{
