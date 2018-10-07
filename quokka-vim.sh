@@ -107,6 +107,10 @@ function vim_requirement_setup_ext()
 
     local distrib_release=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | awk -F= '{print $2}')
 
+    local vim_version=$(vim --version | head -1 | awk '{print $5}')
+    local vim_version_major=$(echo "$vim_version" | awk -F. '{print $1}')
+    local vim_version_minor=$(echo "$vim_version" | awk -F. '{print $2}')
+
     # tagbar {{{
     # build tag file indexes of source code definitions
     sudo apt-get install -y exuberant-ctags
@@ -120,7 +124,9 @@ function vim_requirement_setup_ext()
     # ycm {{{
     # YouCompleteMe requires Vim 7.4.1578+
     # install vim using source (Vim 8.1)
-    vim_build_from_source
+    if [ $vim_version_major -lt 8 ]; then
+        vim_build_from_source
+    fi
 
     sudo apt-get install -y build-essential python3-dev
 
