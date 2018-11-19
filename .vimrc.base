@@ -179,9 +179,12 @@ nnoremap <Leader>" viw<Esc>a"<Esc>hbi"<Esc>lel
 vnoremap <Leader>" <Esc>`>a"<Esc>`<i"<Esc>`>ll
 
 " window operations {
-" resize window
-nnoremap + <C-W>+
-nnoremap - <C-W>-
+" resize window's height
+nnoremap + 5<C-W>+
+nnoremap - 5<C-W>-
+" resize window's width with 5 columns step
+nnoremap > 5<C-W>>
+nnoremap < 5<C-W><
 " move cursor to other windows
 nnoremap <C-H> <C-W>h
 nnoremap <C-J> <C-W>j
