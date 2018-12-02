@@ -112,10 +112,14 @@ set cindent
 set backspace=indent,eol,start
 
 " keep minimal number when scrolling
-" vertically
+" Minimal number of screen lines to keep above and below the cursor
 set scrolloff=3
-" horizontally
+" Minimal number of screen columns to keep to the left and to the right of the cursor
 set sidescrolloff=6
+" Minimal number of lines to scroll vertically
+set scrolljump=1
+" Minimal number of columns to scroll horizontally
+set sidescroll=1
 
 " jump to the matching one when a bracket is inserted
 set showmatch
