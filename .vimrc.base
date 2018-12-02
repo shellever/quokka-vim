@@ -206,6 +206,13 @@ nnoremap <C-L> <C-W>l
 nnoremap H 0
 nnoremap L $
 
+" copy contents to system clipboard
+vnoremap <Leader><C-Y> "+y
+" copy file path to system clipboard
+nnoremap <Leader><C-Y> :let @+ = expand("%:p")<CR>
+" paste contents from system clipboard
+nnoremap <Leader><C-P> "+p
+
 " quit and write
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>q! :q!<CR>
