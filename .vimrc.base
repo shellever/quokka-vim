@@ -168,6 +168,11 @@ inoremap jk <Esc>
 " stop the highlighting 
 nnoremap <Leader>hl :nohlsearch<CR>
 
+" clean ^M in line tail
+nnoremap <Leader>cM :%s/\r$//g<CR>:nohlsearch<CR>
+" clean space in line tail
+nnoremap <Leader>cS :%s/\s+$//g<CR>:nohlsearch<CR>
+
 " view the help for the word nearest to the cursor
 nnoremap <Leader>H :execute ":help " . expand("<cword>")<CR>
 
