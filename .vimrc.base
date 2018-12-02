@@ -52,7 +52,7 @@ set visualbell t_vb=
 set number
 " show the line and column number of the cursor position
 set ruler
-" determinie the content of the ruler string 
+" determine the content of the ruler string 
 "set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
 " show status line
 set laststatus=2
@@ -119,7 +119,7 @@ set sidescrolloff=6
 
 " jump to the matching one when a bracket is inserted
 set showmatch
-" tenths of a second to show the matching paren (1/10s=100ms)
+" tenths of a second to show the matching parent (1/10s=100ms)
 set matchtime=1
 
 " ignore the case of normal letters
