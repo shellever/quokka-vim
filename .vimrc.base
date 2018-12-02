@@ -202,6 +202,10 @@ nnoremap <C-L> <C-W>l
 " inoremap <C-A> <Esc>0i
 " inoremap <C-E> <Esc>$i
 
+" move cursor to head/tail of the line quickly
+nnoremap H 0
+nnoremap L $
+
 " quit and write
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>q! :q!<CR>
