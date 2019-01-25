@@ -107,9 +107,10 @@ function vim_requirement_setup_ext()
 
     local distrib_release=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | awk -F= '{print $2}')
 
-    local vim_version=$(vim --version | head -1 | awk '{print $5}')
-    local vim_version_major=$(echo "$vim_version" | awk -F. '{print $1}')
-    local vim_version_minor=$(echo "$vim_version" | awk -F. '{print $2}')
+    local is_need_vim_build=false
+    local vim_version=
+    local vim_version_major=
+    local vim_version_minor=
 
     # tagbar {{{
     # build tag file indexes of source code definitions
@@ -124,7 +125,19 @@ function vim_requirement_setup_ext()
     # ycm {{{
     # YouCompleteMe requires Vim 7.4.1578+
     # install vim using source (Vim 8.1)
-    if [ $vim_version_major -lt 8 ]; then
+    if [ -z "$(which vim)" ]; then
+        is_need_vim_build=true
+    else
+        vim_version=$(vim --version | head -1 | awk '{print $5}')
+        vim_version_major=$(echo "$vim_version" | awk -F. '{print $1}')
+        vim_version_minor=$(echo "$vim_version" | awk -F. '{print $2}')
+
+        if [ $vim_version_major -lt 8 ]; then
+            is_need_vim_build=true
+        fi
+    fi
+
+    if [ "$is_need_vim_build" = "true" ]; then
         vim_build_from_source
     fi
 
