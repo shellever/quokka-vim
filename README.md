@@ -2,6 +2,8 @@
 
 Love vim, love quokka smile.
 
+Current Tested: Ubuntu 14.04, 16.04
+
 
 ## Installation
 
