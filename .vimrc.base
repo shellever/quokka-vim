@@ -177,6 +177,9 @@ nnoremap <Leader>cM :%s/\r$//g<CR>:nohlsearch<CR>
 " clean space in line tail
 nnoremap <Leader>cS :%s/\s+$//g<CR>:nohlsearch<CR>
 
+" replace tab with four space
+nnoremap <Leader>ts :%ret!4<CR>
+
 " view the help for the word nearest to the cursor
 nnoremap <Leader>H :execute ":help " . expand("<cword>")<CR>
 
