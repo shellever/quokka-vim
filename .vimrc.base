@@ -175,7 +175,7 @@ nnoremap <Leader>hl :nohlsearch<CR>
 " clean ^M in line tail
 nnoremap <Leader>cM :%s/\r$//g<CR>:nohlsearch<CR>
 " clean space in line tail
-nnoremap <Leader>cS :%s/\s+$//g<CR>:nohlsearch<CR>
+nnoremap <Leader>cS :%s/\s\+$//g<CR>:nohlsearch<CR>
 
 " replace tab with four space
 nnoremap <Leader>ts :%ret!4<CR>
